@@ -5,7 +5,8 @@ pipeline {
 
         stage('Checkout Out') {
             steps {
-                git branch: 'main', url: 'https://github.com/meroyasser222003-hue/Amira_Jenkins.git'
+                git branch: 'main',
+                url: 'https://github.com/meroyasser222003-hue/Amira_Jenkins.git'
             }
         }
 
@@ -23,10 +24,19 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Website deployed successfully'
+                sh 'docker build -t photo-gallery .'
             }
         }
+
+        stage('Run Docker Container') {
+            steps {
+                sh 'docker stop photo-container || true'
+                sh 'docker rm photo-container || true'
+                sh 'docker run -d -p 8085:80 --name photo-container photo-gallery'
+            }
+        }
+
     }
 }
