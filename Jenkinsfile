@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE   = 'meroyasser222003/school-website'
+        DOCKER_IMAGE   = 'amirayasser2003/school-website'
         DOCKER_TAG     = "${BUILD_NUMBER}"
         DOCKER_LATEST  = 'latest'
         DOCKER_CREDS   = 'dockerhub-credentials'
